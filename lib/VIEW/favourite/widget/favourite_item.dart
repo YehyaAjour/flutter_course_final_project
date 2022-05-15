@@ -1,5 +1,5 @@
 import '../../../SERVICES/app_imports.dart';
-import '../../custom_widget/cashed_network_image_share.dart';
+import '../../custom_widget/custom_cached_network_image.dart';
 import '../../custom_widget/custom_rates.dart';
 
 class FavouriteItem extends StatelessWidget {
@@ -29,7 +29,7 @@ class FavouriteItem extends StatelessWidget {
         children: [
           Row(
             children: [
-              CachedNetworkImageShare(
+              CustomCachedNetworkImage(
                 urlImage: fruitImageUrl,
                 widthNumber: 95,
                 heigthNumber: 95,

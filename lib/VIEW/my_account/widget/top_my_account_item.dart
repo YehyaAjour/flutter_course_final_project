@@ -1,5 +1,5 @@
 import '../../../SERVICES/app_imports.dart';
-import '../../custom_widget/cashed_network_image_share.dart';
+import '../../custom_widget/custom_cached_network_image.dart';
 
 class TopMyAccountItem extends StatelessWidget {
 final String profileImgUrl;
@@ -25,7 +25,7 @@ final Function onEditPressed;
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              CachedNetworkImageShare(
+              CustomCachedNetworkImage(
                 urlImage:
                 profileImgUrl,
                 widthNumber: 85,

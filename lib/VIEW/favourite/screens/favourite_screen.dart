@@ -1,4 +1,4 @@
-import 'package:flutter_course_final_project/VIEW/custom_widget/cashed_network_image_share.dart';
+import 'package:flutter_course_final_project/VIEW/custom_widget/custom_cached_network_image.dart';
 
 import '../../../SERVICES/app_imports.dart';
 import '../../custom_widget/custom_rates.dart';

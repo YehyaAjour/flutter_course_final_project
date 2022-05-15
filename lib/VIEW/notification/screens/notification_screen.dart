@@ -1,5 +1,5 @@
 import '../../../SERVICES/app_imports.dart';
-import '../../custom_widget/cashed_network_image_share.dart';
+import '../../custom_widget/custom_cached_network_image.dart';
 import '../widget/notification_item.dart';
 
 class NotificationScreen extends StatelessWidget {

@@ -3,7 +3,7 @@ import 'package:flutter_course_final_project/VIEW/my_account/widget/top_my_accou
 
 import '../../../SERVICES/app_imports.dart';
 import '../../auth/screens/login_screen.dart';
-import '../../custom_widget/cashed_network_image_share.dart';
+import '../../custom_widget/custom_cached_network_image.dart';
 import '../../main_screen/screens/main_screen.dart';
 import 'my_order_screen.dart';
 import 'setting_screen.dart';

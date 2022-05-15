@@ -1,7 +1,7 @@
 import 'package:flutter_course_final_project/VIEW/custom_widget/custom_rates.dart';
 
 import '../../../SERVICES/app_imports.dart';
-import '../../custom_widget/cashed_network_image_share.dart';
+import '../../custom_widget/custom_cached_network_image.dart';
 
 class MyOrderItem extends StatelessWidget {
   final String imgUrl;
@@ -28,7 +28,7 @@ class MyOrderItem extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CachedNetworkImageShare(
+                CustomCachedNetworkImage(
                   urlImage: imgUrl,
                   heigthNumber: 95,
                   widthNumber: 95,

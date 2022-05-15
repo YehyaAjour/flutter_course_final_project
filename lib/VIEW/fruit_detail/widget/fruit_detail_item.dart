@@ -1,5 +1,5 @@
 import '../../../SERVICES/app_imports.dart';
-import '../../custom_widget/cashed_network_image_share.dart';
+import '../../custom_widget/custom_cached_network_image.dart';
 
 class FruitDetailItem extends StatelessWidget {
   final String imgUrl;
@@ -29,7 +29,7 @@ class FruitDetailItem extends StatelessWidget {
           SizedBox(
             height: 24.h,
           ),
-          CachedNetworkImageShare(
+          CustomCachedNetworkImage(
             urlImage: imgUrl,
             widthNumber: double.infinity,
             heigthNumber: 176.h,

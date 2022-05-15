@@ -3,14 +3,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeleton_text/skeleton_text.dart';
 
-class CachedNetworkImageShare extends StatelessWidget {
+class CustomCachedNetworkImage extends StatelessWidget {
   final String urlImage;
   final double widthNumber;
   final double heigthNumber;
   final double borderNumber;
   final BoxFit fit;
 
-  CachedNetworkImageShare(
+  CustomCachedNetworkImage(
       {this.urlImage, this.heigthNumber, this.widthNumber, this.borderNumber,
       this.fit});
   @override

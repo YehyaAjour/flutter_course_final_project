@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_course_final_project/VIEW/custom_widget/custom_text.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../custom_widget/cashed_network_image_share.dart';
+import '../../custom_widget/custom_cached_network_image.dart';
 import '../../custom_widget/custom_rates.dart';
 
 class BuildItem extends StatelessWidget {
@@ -33,7 +33,7 @@ class BuildItem extends StatelessWidget {
                 child: Stack(
                   alignment: Alignment.topRight,
                   children: [
-                    CachedNetworkImageShare(
+                    CustomCachedNetworkImage(
                       urlImage: 'https://images.news18.com/ibnlive/uploads/2022/03/watermelon.jpg',
                       heigthNumber: 143,
                       widthNumber: 118,
