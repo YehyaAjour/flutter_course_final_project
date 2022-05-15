@@ -47,7 +47,7 @@ class CustomRateWrite extends StatelessWidget {
         child: RatingBar(
           onRatingChanged: (rating) => onRatingChanged(rating),
           size: size ?? 40.r,
-          initialRating: 3.5,
+          initialRating: 0,
           isHalfAllowed: true,
           halfFilledIcon: Icons.star,
           filledIcon: Icons.star,

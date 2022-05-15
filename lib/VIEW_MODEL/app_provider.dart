@@ -30,8 +30,9 @@ class AppProvider extends ChangeNotifier {
   decreaseFavouriteItemCount(){
     if(itemCount>0){
       itemCount--;
+      notifyListeners();
     }else {return null;}
 
-    notifyListeners();
+
   }
 }

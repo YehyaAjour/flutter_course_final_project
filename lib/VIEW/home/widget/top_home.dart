@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_course_final_project/style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../SERVICES/navigator_helper.dart';
+import '../../notification/screens/notification_screen.dart';
+
 class TopHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 190.h,
+      height: 180.h,
       child: Stack(
         children: <Widget>[
           Container(
@@ -32,7 +35,10 @@ class TopHome extends StatelessWidget {
                     Icons.notifications,
                     color: Colors.white,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    NavigationHelper.navigationHelper
+                        .pushMethod(NotificationScreen.routeName);
+                  },
                 ),
               ],
             ),

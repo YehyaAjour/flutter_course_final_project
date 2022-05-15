@@ -11,7 +11,12 @@ import 'VIEW/auth/screens/login_screen.dart';
 import 'VIEW/auth/screens/register_screen.dart';
 import 'VIEW/fruit_detail/screens/fruit_detail_screen.dart';
 import 'VIEW/main_screen/screens/main_screen.dart';
+import 'VIEW/my_account/screens/language_setting_screen.dart';
+import 'VIEW/my_account/screens/my_order_screen.dart';
+import 'VIEW/my_account/screens/notification_setting_screen.dart';
+import 'VIEW/notification/screens/notification_screen.dart';
 import 'VIEW/on_boarding/screens/on_boarding_screen.dart';
+import 'VIEW/my_account/screens/setting_screen.dart';
 import 'VIEW/splash/splash_screen.dart';
 import 'VIEW_MODEL/global_view_provider.dart';
 
@@ -64,6 +69,11 @@ class MyApp extends StatelessWidget {
             RegisterScreen.routeName: (context) => RegisterScreen(),
             MainScreen.routeName: (context) => MainScreen(),
             FruitDetailScreen.routeName: (context) => FruitDetailScreen(),
+            NotificationScreen.routeName: (context) => NotificationScreen(),
+            MyOrderScreen.routeName: (context) => MyOrderScreen(),
+            SettingScreen.routeName: (context) => SettingScreen(),
+            NotificationSettingScreen.routeName: (context) => NotificationSettingScreen(),
+            LanguageSettingScreen.routeName: (context) => LanguageSettingScreen(),
           },
         ),
       ),

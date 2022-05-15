@@ -1,5 +1,3 @@
-
-
 import 'package:flutter_course_final_project/VIEW/custom_widget/cashed_network_image_share.dart';
 
 import '../../../SERVICES/app_imports.dart';
@@ -27,21 +25,22 @@ class FavouriteScreen extends StatelessWidget {
         ),
         Expanded(
           child: ListView.builder(
+            itemCount: 5,
             physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, i) {
-                return FavouriteItem(fruitImageUrl: 'https://media.istockphoto.com/photos/grape-dark-grape-grapes-with-leaves-isolated-with-clipping-path-full-picture-id803721418?k=20&m=803721418&s=612x612&w=0&h=U2vUEoYYZD6xdYJc-2dhZpa1EvIxkXdiUaAlE-Kexn4=',
+            itemBuilder: (context, i) {
+              return FavouriteItem(
+                fruitImageUrl:
+                    'https://media.istockphoto.com/photos/grape-dark-grape-grapes-with-leaves-isolated-with-clipping-path-full-picture-id803721418?k=20&m=803721418&s=612x612&w=0&h=U2vUEoYYZD6xdYJc-2dhZpa1EvIxkXdiUaAlE-Kexn4=',
                 fruitName: 'Grapes',
                 fruitPrice: '160 Per/ kg',
                 fruitDetails: 'Pick up from organic farms',
-                  fruitRate: '4',
-                  onPressedAdd: (){},
-                );
-              },
-              itemCount: 10),
+                fruitRate: '4',
+                onPressedAdd: () {},
+              );
+            },
+          ),
         )
       ],
     );
   }
-
-
 }
