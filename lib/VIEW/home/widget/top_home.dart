@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_course_final_project/style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,7 +10,7 @@ class TopHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 180.h,
+      height: 133.h,
       child: Stack(
         children: <Widget>[
           Container(
@@ -44,31 +45,31 @@ class TopHome extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 80.0,
-            left: 0.0,
-            right: 0.0,
+            top: 80.0.h,
+            left: 0.0.w,
+            right: 0.0.w,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                    boxShadow: const [
+                    borderRadius: BorderRadius.circular(6.0),
+                    boxShadow: const[
                       BoxShadow(
-                        color: Colors.grey,
-                        offset: Offset(1.0, 10.2),
-                        blurRadius: 5.2,
-                      )
+                        color:  Color(0x2f000000),
+                        offset: Offset(0, 3),
+                        blurRadius: 36,
+                      ),
                     ],
-                    borderRadius: BorderRadius.circular(5.r),
                     color: Colors.white),
-                child: const TextField(
+                child:  TextField(
                   decoration: InputDecoration(
-                      prefixIcon: Icon(
+                      prefixIcon: const Icon(
                         Icons.search,
                         color: Colors.grey,
                       ),
-                      hintText: "Search",
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
+                      hintText: "Search".tr(),
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide:  BorderSide(
                           color: Color(0xff69A03A),
                         ),
                       ),

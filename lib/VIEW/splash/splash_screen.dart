@@ -1,5 +1,8 @@
 import 'dart:async';
 
+
+import 'package:easy_localization/easy_localization.dart';
+
 import '../../SERVICES/app_imports.dart';
 import '../on_boarding/screens/on_boarding_screen.dart';
 

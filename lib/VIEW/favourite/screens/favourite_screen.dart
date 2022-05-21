@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_course_final_project/VIEW/custom_widget/custom_cached_network_image.dart';
 
 import '../../../SERVICES/app_imports.dart';
@@ -17,7 +18,7 @@ class FavouriteScreen extends StatelessWidget {
           elevation: 0,
           backgroundColor: greenColor,
           title: CustomText(
-            'Favourite',
+            'Favourite'.tr(),
             color: Colors.white,
             fontSize: 14.sp,
             fontWeight: FontWeight.normal,

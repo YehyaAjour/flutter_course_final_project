@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_course_final_project/VIEW/my_account/widget/top_my_account_item.dart';
 
@@ -27,49 +28,49 @@ class MyAccountScreen extends StatelessWidget {
             child: Column(
               children: [
                 MyAccountItem(
-                    labelName: "My Orders",
+                    labelName: "My Orders".tr(),
                     iconData: Icons.shopping_bag,
                     onTapItem: () {
                       NavigationHelper.navigationHelper
                           .pushMethod(MyOrderScreen.routeName);
                     }),
                 MyAccountItem(
-                    labelName: "Favourite",
+                    labelName: "Favourite".tr(),
                     iconData: Icons.favorite,
                     onTapItem: () {
                       value.setIndexScreen(2);
                       print(value.indexScreen);
                     }),
                 MyAccountItem(
-                    labelName: "Setting",
+                    labelName: "Setting".tr(),
                     iconData: Icons.settings,
                     onTapItem: () {
                       NavigationHelper.navigationHelper.pushMethod(SettingScreen.routeName);
                     }),
                 MyAccountItem(
-                    labelName: "My Cart",
+                    labelName: "My Cart".tr(),
                     iconData: Icons.shopping_cart,
                     onTapItem: () {
                       value.setIndexScreen(1);
                       print(value.indexScreen);
                     }),
                 MyAccountItem(
-                  labelName: "Rate Us",
+                  labelName: "Rate Us".tr(),
                   iconData: Icons.star_rate,
                   onTapItem: () {},
                 ),
                 MyAccountItem(
-                  labelName: "Refer a Friend",
+                  labelName: "Refer a Friend".tr(),
                   iconData: Icons.share,
                   onTapItem: () {},
                 ),
                 MyAccountItem(
-                  labelName: "Help ",
+                  labelName: "Help".tr(),
                   iconData: Icons.help,
                   onTapItem: () {},
                 ),
                 MyAccountItem(
-                    labelName: "Log Out",
+                    labelName: "Log Out".tr(),
                     iconData: Icons.logout,
                     onTapItem: () {
                       NavigationHelper.navigationHelper

@@ -1,17 +1,26 @@
 
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../SERVICES/app_imports.dart';
+import '../../../VIEW_MODEL/global_view_provider.dart';
 import '../../auth/screens/login_screen.dart';
 import '../widget/boarding_item.dart';
 
-class OnBoardingScreen extends StatelessWidget {
+class OnBoardingScreen extends StatefulWidget {
   static String routeName = 'OnBoardingScreen';
+
+  @override
+  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
+}
+
+class _OnBoardingScreenState extends State<OnBoardingScreen> {
   PageController pageController = PageController(initialPage: 0);
 
   @override
   Widget build(BuildContext context) {
+    var providerLanguages = Provider.of<GlobalViewProvider>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -19,13 +28,31 @@ class OnBoardingScreen extends StatelessWidget {
             SizedBox(
               height: 54.h,
             ),
-            Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                    backgroundColor: Colors.white.withOpacity(0.9),
+                    context: context,
+                    builder: (context) {
+                      return buildSheet();
+                    },
+                  );
+                },
+                child: CustomText(
+                  providerLanguages.current_lang == 'ar'
+                      ? 'العربية'
+                      : "English (United States)",
+                  color: Colors.black,
+                  fontSize: 14.sp,
+                ),
+              ),
               TextButton(
                 onPressed: () {
                   NavigationHelper.navigationHelper.pushMethod(LoginScreen.routeName);
                 },
                 child: CustomText(
-                  'Skip',
+                  'Skip'.tr(),
                   color: greyColor,
                   fontSize: 14.sp,
                   fontWeight: FontWeight.normal,
@@ -43,15 +70,15 @@ class OnBoardingScreen extends StatelessWidget {
                   BoardingItem(
                       imageName: 'E_Shopping',
                       title: 'E Shopping',
-                      details: 'Explore  top organic fruits & grab them'),
+                      details: 'Explore top organic fruits & grab them'),
                   BoardingItem(
                       imageName: 'Delivery_on_way',
                       title: 'Delivery on the way',
-                      details: 'Explore  top organic fruits & grab them'),
+                      details: 'Get your order by speed delivery'),
                   BoardingItem(
                       imageName: 'Delivery_Arrived',
                       title: 'Delivery Arrived',
-                      details: 'Explore  top organic fruits & grab them'),
+                      details: 'Order is arrived at your Place'),
                 ],
                 onPageChanged: (x) {
                   Provider.of<AppProvider>(context,listen: false).inBoardingChangePageIndex(x);
@@ -85,7 +112,7 @@ class OnBoardingScreen extends StatelessWidget {
                       curve: Curves.bounceInOut);
 
                 },
-                child: CustomText('Next',
+                child: CustomText('Next'.tr(),
                     color: whiteColor,
                     fontSize: 14.sp,
                     fontWeight: FontWeight.normal),
@@ -95,7 +122,7 @@ class OnBoardingScreen extends StatelessWidget {
                 onPressed: () {
                   NavigationHelper.navigationHelper.pushMethod(LoginScreen.routeName);
                 },
-                child: CustomText('Get Started',
+                child: CustomText('Get Started'.tr(),
                     color: whiteColor,
                     fontSize: 14.sp,
                     fontWeight: FontWeight.normal),
@@ -106,4 +133,66 @@ class OnBoardingScreen extends StatelessWidget {
       ),
     );
   }
+  Widget buildSheet() {
+    var providerLangueges = Provider.of<GlobalViewProvider>(context);
+    return StatefulBuilder(
+      builder: (thisLowerContext, innerSetState) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              height: 75.h,
+            ),
+            GestureDetector(
+              onTap: () {
+                providerLangueges.changeLanguage(context, 'ar');
+                Navigator.pop(context);
+              },
+              child: Container(
+                color: providerLangueges.current_lang == 'ar'
+                    ? Colors.white.withOpacity(0.5)
+                    : null,
+                width: double.infinity,
+                height: 45.h,
+                child: Center(
+                  child: CustomText(
+                    'العربية',
+                    fontFamily: 'din',
+                    fontSize: 15.sp,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+            GestureDetector(
+              onTap: () {
+                providerLangueges.changeLanguage(context, 'en');
+                Navigator.pop(context);
+              },
+              child: Container(
+                color: providerLangueges.current_lang == 'en'
+                    ? Colors.white.withOpacity(0.5)
+                    : null,
+                width: double.infinity,
+                height: 45.h,
+                child: Center(
+                  child: CustomText(
+                    'English',
+                    fontFamily: 'din',
+                    fontSize: 15.sp,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 50.h,
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 }

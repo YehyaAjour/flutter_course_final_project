@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import '../../../SERVICES/app_imports.dart';
 
 class NotificationSettingScreen extends StatelessWidget {
@@ -17,7 +19,7 @@ class NotificationSettingScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: greenColor,
         title: CustomText(
-          'Notification Setting',
+          'Notification Setting'.tr(),
           color: Colors.white,
           fontSize: 14.sp,
           fontWeight: FontWeight.normal,
@@ -42,12 +44,12 @@ class NotificationSettingScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      'My Account',
+                      'My Account'.tr(),
                       fontSize: 14.sp,
                       fontWeight: FontWeight.normal,
                     ),
                     CustomText(
-                      'You will receive daily updates',
+                      'You will receive daily updates'.tr(),
                       fontSize: 14.sp,
                       fontWeight: FontWeight.normal,
                       color: greyTextColor,
@@ -73,12 +75,12 @@ class NotificationSettingScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      'Pramotional Notifications',
+                      'Promotional Notifications'.tr(),
                       fontSize: 14.sp,
                       fontWeight: FontWeight.normal,
                     ),
                     CustomText(
-                      'You will receive daily updates',
+                      'You will receive daily updates'.tr(),
                       fontSize: 14.sp,
                       fontWeight: FontWeight.normal,
                       color: greyTextColor,

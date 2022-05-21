@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import '../../../SERVICES/app_imports.dart';
 import '../../fruit_detail/screens/fruit_detail_screen.dart';
 import '../widget/build_item.dart';
@@ -10,6 +12,7 @@ class HomeScreen extends StatelessWidget {
     return Column(
       children: [
         TopHome(),
+        SizedBox(height: 25.h,),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
@@ -29,9 +32,8 @@ class HomeScreen extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      'Vegetables',
+                      'Vegetables'.tr(),
                       style: TextStyle(
-                        fontFamily: "Poppins",
                         fontSize: 15.sp,
                         color:
                             value.categoryIndex == 0 ? Colors.white : greyColor,
@@ -58,9 +60,8 @@ class HomeScreen extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      'Fruits',
+                      'Fruits'.tr(),
                       style: TextStyle(
-                        fontFamily: "Poppins",
                         fontSize: 15.sp,
                         color:
                             value.categoryIndex == 1 ? Colors.white : greyColor,
@@ -87,7 +88,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      'Dry Fruits',
+                      'Dry Fruits'.tr(),
                       style: TextStyle(
                         fontFamily: "Poppins",
                         fontSize: 15.sp,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +36,7 @@ class CustomNavBottom extends StatelessWidget {
                 height: 5.h,
               ),
               CustomText(
-                "Home",
+                "Home".tr(),
                 fontSize: 14.sp,
                 color: greenColor,
                 fontWeight: FontWeight.w400,
@@ -54,7 +55,7 @@ class CustomNavBottom extends StatelessWidget {
                 height: 5.h,
               ),
               CustomText(
-                "Home",
+                "Home".tr(),
                 fontWeight: FontWeight.w400,
                 fontSize: 14.sp,
                 color: borderColor,
@@ -76,7 +77,7 @@ class CustomNavBottom extends StatelessWidget {
                 height: 5.h,
               ),
               CustomText(
-                "Shopping cart",
+                "Shopping cart".tr(),
                 fontWeight: FontWeight.w400,
                 fontSize: 14.sp,
                 color: greenColor,
@@ -95,7 +96,7 @@ class CustomNavBottom extends StatelessWidget {
                 height: 5.h,
               ),
               CustomText(
-                "Shopping cart",
+                "Shopping cart".tr(),
                 fontWeight: FontWeight.w400,
                 fontSize: 14.sp,
                 color: borderColor,
@@ -118,7 +119,7 @@ class CustomNavBottom extends StatelessWidget {
                 height: 5.h,
               ),
               CustomText(
-                "Favourite",
+                "Favourite".tr(),
                 fontWeight: FontWeight.w400,
                 fontSize: 14.sp,
                 color: greenColor,
@@ -138,7 +139,7 @@ class CustomNavBottom extends StatelessWidget {
                 height: 5.h,
               ),
               CustomText(
-                "Favourite",
+                "Favourite".tr(),
                 fontWeight: FontWeight.w400,
                 fontSize: 14.sp,
                 color: borderColor,
@@ -161,7 +162,7 @@ class CustomNavBottom extends StatelessWidget {
                 height: 5.h,
               ),
               CustomText(
-                "My Account",
+                "My Account".tr(),
                 fontWeight: FontWeight.w400,
                 fontSize: 14.sp,
                 color: greenColor,
@@ -180,7 +181,7 @@ class CustomNavBottom extends StatelessWidget {
                 height: 5.h,
               ),
               CustomText(
-                "My Account",
+                "My Account".tr(),
                 fontWeight: FontWeight.w400,
                 fontSize: 14.sp,
                 color: borderColor,

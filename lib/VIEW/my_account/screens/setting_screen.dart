@@ -1,5 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import '../../../SERVICES/app_imports.dart';
 import '../widget/my_account_item.dart';
+import 'change_address_screen.dart';
 import 'language_setting_screen.dart';
 import 'notification_setting_screen.dart';
 
@@ -20,7 +23,7 @@ class SettingScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: greenColor,
         title: CustomText(
-          'Setting',
+          'Setting'.tr(),
           color: Colors.white,
           fontSize: 14.sp,
           fontWeight: FontWeight.normal,
@@ -33,14 +36,14 @@ class SettingScreen extends StatelessWidget {
           //     iconData: Icons.account_circle,
           //     onTapItem: () {}),
           MyAccountItem(
-              labelName: "Notification",
+              labelName: "Notification".tr(),
               iconData: Icons.notifications,
               onTapItem: () {
                 NavigationHelper.navigationHelper
                     .pushMethod(NotificationSettingScreen.routeName);
               }),
           MyAccountItem(
-            labelName: "Language",
+            labelName: "Language".tr(),
             iconData: Icons.language,
             onTapItem: () {
               NavigationHelper.navigationHelper
@@ -48,9 +51,12 @@ class SettingScreen extends StatelessWidget {
             },
           ),
           MyAccountItem(
-              labelName: "Change Location",
+              labelName: "Change Location".tr(),
               iconData: Icons.edit_location,
-              onTapItem: () {}),
+              onTapItem: () {
+                NavigationHelper.navigationHelper.pushMethod(ChangeAddressScreen.routeName);
+
+              }),
         ],
       ),
     );

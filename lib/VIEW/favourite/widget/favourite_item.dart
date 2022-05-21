@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import '../../../SERVICES/app_imports.dart';
 import '../../custom_widget/custom_cached_network_image.dart';
 import '../../custom_widget/custom_rates.dart';
@@ -120,7 +122,7 @@ class FavouriteItem extends StatelessWidget {
                                 backgroundColor:
                                     MaterialStateProperty.all(orangeColor)),
                             onPressed: onPressedAdd,
-                            child: CustomText('Add',
+                            child: CustomText('Add'.tr(),
                                 color: whiteColor,
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.normal),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_course_final_project/VIEW/fruit_detail/widget/fruit_detail_item.dart';
 
 import '../../../SERVICES/app_imports.dart';
@@ -19,7 +20,7 @@ class FruitDetailScreen extends StatelessWidget {
           },
         ),
         title: CustomText(
-          'Details',
+          'Details'.tr(),
           color: Colors.white,
           fontSize: 14.sp,
           fontWeight: FontWeight.normal,

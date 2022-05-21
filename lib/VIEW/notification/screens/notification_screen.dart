@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import '../../../SERVICES/app_imports.dart';
 import '../../custom_widget/custom_cached_network_image.dart';
 import '../widget/notification_item.dart';
@@ -18,7 +20,7 @@ class NotificationScreen extends StatelessWidget {
           },
         ),
         title: CustomText(
-          'Notification',
+          'Notification'.tr(),
           color: Colors.white,
           fontSize: 14.sp,
           fontWeight: FontWeight.normal,
@@ -33,7 +35,7 @@ class NotificationScreen extends StatelessWidget {
               height: 20.h,
             ),
             CustomText(
-              'Today',
+              'Today'.tr(),
               fontSize: 14.sp,
               fontWeight: FontWeight.w800,
             ),

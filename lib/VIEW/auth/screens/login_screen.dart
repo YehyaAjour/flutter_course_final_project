@@ -1,15 +1,10 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_course_final_project/VIEW/auth/screens/register_screen.dart';
 import 'package:flutter_course_final_project/VIEW/auth/widget/default_text_form_field.dart';
-import 'package:flutter_course_final_project/VIEW/custom_widget/custom_image.dart';
-import 'package:flutter_course_final_project/VIEW/custom_widget/custom_text.dart';
-import 'package:flutter_course_final_project/style.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../SERVICES/navigator_helper.dart';
-import '../../main_screen/screens/main_screen.dart';
+import '../../../SERVICES/app_imports.dart';
+import '../../../VIEW_MODEL/auth_provider.dart';
 import '../widget/default_button.dart';
+
 
 class LoginScreen extends StatelessWidget {
   static String routeName = 'LoginScreen';
@@ -20,6 +15,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var authProvider = Provider.of<AuthProvider>(context);
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -48,8 +45,8 @@ class LoginScreen extends StatelessWidget {
                   DefaultTextFormField(
                       controller: emailController,
                       keyboardType: TextInputType.emailAddress,
-                      validateText: "Email Address Must Not Be Empty",
-                      labelText: "Email Address",
+                      validateText: "Email Address Must Not Be Empty".tr(),
+                      labelText: "Email Address".tr(),
                       prefix: Icons.email),
                   SizedBox(
                     height: 15.h,
@@ -58,8 +55,8 @@ class LoginScreen extends StatelessWidget {
                       controller: passwordController,
                       keyboardType: TextInputType.visiblePassword,
                       // isPassword: AppCubit.get(context).isPassword,
-                      validateText: "Password  Must Not Be Empty",
-                      labelText: "Password",
+                      validateText: "Password  Must Not Be Empty".tr(),
+                      labelText: "Password".tr(),
                       prefix: Icons.lock,
                       // suffix: AppCubit.get(context).suffix,
                       suffixPressed: () {
@@ -68,11 +65,12 @@ class LoginScreen extends StatelessWidget {
                   SizedBox(
                     height: 30.h,
                   ),
-                  DefaultButton(
-                      title: 'LOGIN',
+                  authProvider.isLoading?const Center(child: CircularProgressIndicator()):DefaultButton(
+                      title: 'LOGIN'.tr(),
                       onPressed: () {
-                        NavigationHelper.navigationHelper
-                            .pushMethod(MainScreen.routeName);
+                        authProvider.login(email: emailController.text.trim(),password: passwordController.text.trim());
+                        // NavigationHelper.navigationHelper
+                        //     .pushMethod(MainScreen.routeName);
                       }),
                   SizedBox(
                     height: 10.h,
@@ -81,7 +79,7 @@ class LoginScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CustomText(
-                        "Dont Have An Account? ",
+                        "Dont Have An Account? ".tr(),
                         fontSize: 14.sp,
                         fontWeight: FontWeight.normal,
                       ),
@@ -91,7 +89,7 @@ class LoginScreen extends StatelessWidget {
                               .pushMethod(RegisterScreen.routeName);
                         },
                         child: CustomText(
-                          "Register Now",
+                          "Register Now".tr(),
                           fontSize: 14.sp,
                           fontWeight: FontWeight.normal,
                           color: greenColor,

@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import '../../../SERVICES/app_imports.dart';
 import '../../../VIEW_MODEL/global_view_provider.dart';
 
@@ -39,7 +41,7 @@ class _LanguageSettingScreenState extends State<LanguageSettingScreen> {
               height: 14.h,
             ),
             CustomText(
-              'Language',
+              'Language'.tr(),
               fontSize: 14.sp,
               fontWeight: FontWeight.normal,
               color: greyTextColor,
@@ -50,7 +52,7 @@ class _LanguageSettingScreenState extends State<LanguageSettingScreen> {
             Row(
               children: [
                 CustomText(
-                  'Language',
+                  'Language'.tr(),
                   fontSize: 14.sp,
                   fontWeight: FontWeight.normal,
                 ),

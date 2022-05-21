@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import '../../../SERVICES/app_imports.dart';
 import '../widget/my_order_item.dart';
 
@@ -17,7 +19,7 @@ class MyOrderScreen extends StatelessWidget {
           },
         ),
         title: CustomText(
-          'My Orders',
+          'My Orders'.tr(),
           color: Colors.white,
           fontSize: 14.sp,
           fontWeight: FontWeight.normal,
