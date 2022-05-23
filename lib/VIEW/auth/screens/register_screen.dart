@@ -101,9 +101,8 @@ class RegisterScreen extends StatelessWidget {
                         SizedBox(
                           height: 15.h,
                         ),
-                        authProvider.isLoading
-                            ? const Center(child: CircularProgressIndicator())
-                            : DefaultButton(
+
+                           DefaultButton(
                                 onPressed: () {
                                   if (formKey.currentState.validate()) {
                                     authProvider.register(

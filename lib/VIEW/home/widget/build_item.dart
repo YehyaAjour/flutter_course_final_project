@@ -1,18 +1,17 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_course_final_project/VIEW/custom_widget/custom_text.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:flutter_course_final_project/SERVICES/app_imports.dart';
 import '../../custom_widget/custom_cached_network_image.dart';
 import '../../custom_widget/custom_rates.dart';
 
 class BuildItem extends StatelessWidget {
   final Function onFavouritePressed;
   final Function onTapItem;
-  final Color favouriteColor;
+  final String imgUrl;
+  final String fruitName;
+  final String fruitPrice;
+  final int fruitRate;
+  final bool isLiked;
 
-
-  BuildItem(
-      {this.onFavouritePressed, this.favouriteColor,this.onTapItem});
+  const BuildItem({Key key, this.onFavouritePressed, this.onTapItem, this.imgUrl, this.fruitName, this.fruitPrice, this.fruitRate, this.isLiked}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +33,7 @@ class BuildItem extends StatelessWidget {
                   alignment: Alignment.topRight,
                   children: [
                     CustomCachedNetworkImage(
-                      urlImage: 'https://images.news18.com/ibnlive/uploads/2022/03/watermelon.jpg',
+                      urlImage: imgUrl,
                       heigthNumber: 143,
                       widthNumber: 118,
                       borderNumber: 1,
@@ -43,7 +42,7 @@ class BuildItem extends StatelessWidget {
 
                     Container(
                         decoration:
-                            BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                            BoxDecoration(borderRadius: BorderRadius.circular(20.r)),
                         child: Padding(
                           padding: const EdgeInsets.only(top: 5, right: 5),
                           child: CircleAvatar(
@@ -51,7 +50,7 @@ class BuildItem extends StatelessWidget {
                             child: IconButton(
                               icon: Icon(
                                 Icons.favorite,
-                                color: favouriteColor,
+                                color: isLiked?Colors.grey:Colors.red,
                               ),
                               onPressed: onFavouritePressed,
                             ),
@@ -68,12 +67,12 @@ class BuildItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomRateRead(rate: 4),
+                    CustomRateRead(rate: fruitRate),
                     SizedBox(
                       height: 2.h,
                     ),
                     CustomText(
-                      "Strawberry",
+                      fruitName,
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w800,
                     ),
@@ -81,7 +80,7 @@ class BuildItem extends StatelessWidget {
                       height: 1.h,
                     ),
                     CustomText(
-                      "300 Per/ kg",
+                      "$fruitPrice Per/ kg",
                      fontSize: 12.sp,
                       fontWeight: FontWeight.normal,
                     ),

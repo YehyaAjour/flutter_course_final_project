@@ -5,7 +5,6 @@ import '../../../SERVICES/app_imports.dart';
 import '../../../VIEW_MODEL/auth_provider.dart';
 import '../widget/default_button.dart';
 
-
 class LoginScreen extends StatelessWidget {
   static String routeName = 'LoginScreen';
 
@@ -65,13 +64,18 @@ class LoginScreen extends StatelessWidget {
                   SizedBox(
                     height: 30.h,
                   ),
-                  authProvider.isLoading?const Center(child: CircularProgressIndicator()):DefaultButton(
-                      title: 'LOGIN'.tr(),
-                      onPressed: () {
-                        authProvider.login(email: emailController.text.trim(),password: passwordController.text.trim());
-                        // NavigationHelper.navigationHelper
-                        //     .pushMethod(MainScreen.routeName);
-                      }),
+
+                      DefaultButton(
+                          title: 'LOGIN'.tr(),
+                          onPressed: () {
+                            if (formKey.currentState.validate()) {
+                              authProvider.login(
+                                  email: emailController.text.trim(),
+                                  password: passwordController.text.trim());
+                            }
+                            // NavigationHelper.navigationHelper
+                            //     .pushMethod(MainScreen.routeName);
+                          }),
                   SizedBox(
                     height: 10.h,
                   ),

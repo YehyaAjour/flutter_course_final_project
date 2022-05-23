@@ -2,8 +2,13 @@ import 'dart:async';
 
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_course_final_project/VIEW/auth/screens/login_screen.dart';
+import 'package:flutter_course_final_project/VIEW_MODEL/profile_provider.dart';
 
 import '../../SERVICES/app_imports.dart';
+import '../../SERVICES/sp_helper.dart';
+import '../../VIEW_MODEL/home_screen_provider.dart';
+import '../main_screen/screens/main_screen.dart';
 import '../on_boarding/screens/on_boarding_screen.dart';
 
 
@@ -17,8 +22,19 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Timer(Duration(seconds: 3), () {
-      NavigationHelper.navigationHelper.pushMethod(OnBoardingScreen.routeName);
+    var delay = Duration(seconds: 3);
+
+    Future.delayed(delay, () {
+      if (SPHelper.spHelper.getToken() == '' ||
+          SPHelper.spHelper.getToken() == null) {
+        NavigationHelper.navigationHelper
+            .pushReplacmentMethod(OnBoardingScreen.routeName);
+      } else {
+        Provider.of<ProfileProvider>(context,listen: false);
+        Provider.of<HomeScreenProvider>(context,listen: false);
+        NavigationHelper.navigationHelper
+            .pushReplacmentMethod(MainScreen.routeName);
+      }
     });
     super.initState();
   }

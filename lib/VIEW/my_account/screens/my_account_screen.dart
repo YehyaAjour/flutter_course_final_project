@@ -1,8 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_course_final_project/SERVICES/sp_helper.dart';
 import 'package:flutter_course_final_project/VIEW/my_account/widget/top_my_account_item.dart';
+import 'package:flutter_course_final_project/VIEW_MODEL/profile_provider.dart';
 
+import '../../../MODEL/user_model.dart';
 import '../../../SERVICES/app_imports.dart';
+import '../../../VIEW_MODEL/auth_provider.dart';
 import '../../auth/screens/login_screen.dart';
 import '../../custom_widget/custom_cached_network_image.dart';
 import '../../main_screen/screens/main_screen.dart';
@@ -14,15 +18,33 @@ class MyAccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var value = Provider.of<AppProvider>(context);
+    var authProvider = Provider.of<AuthProvider>(context);
+    var profileProvider = Provider.of<ProfileProvider>(context);
+
     return Column(
       children: [
-        TopMyAccountItem(
-          profileImgUrl:
-              'https://media-exp1.licdn.com/dms/image/C5603AQEGpL-pXwsXaQ/profile-displayphoto-shrink_800_800/0/1637263394180?e=1657756800&v=beta&t=iJEYwp8oZA1C7a78aO3Lt6KdnsjiIs_n5wJLrwSr8tw',
-          name: "Manish Chutake",
-          email: "manishuxuid@gmail.com",
-          onEditPressed: () {},
+        Selector<ProfileProvider, UserModel>(
+          builder: (context, x, _) {
+            if (x == null) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: greenColor,
+                ),
+              );
+            } else {
+              return TopMyAccountItem(
+                profileImgUrl:x.image,
+                name: x.name,
+                email: x.email,
+                onEditPressed: () {},
+              );
+            }
+          },
+          selector: (BuildContext, Provider) {
+            return Provider.model;
+          },
         ),
+
         Expanded(
           child: SingleChildScrollView(
             child: Column(
@@ -73,8 +95,7 @@ class MyAccountScreen extends StatelessWidget {
                     labelName: "Log Out".tr(),
                     iconData: Icons.logout,
                     onTapItem: () {
-                      NavigationHelper.navigationHelper
-                          .pushMethod(LoginScreen.routeName);
+                      authProvider.logout();
                     }),
               ],
             ),

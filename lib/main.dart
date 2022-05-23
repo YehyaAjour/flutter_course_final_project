@@ -4,10 +4,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_course_final_project/VIEW_MODEL/app_provider.dart';
 import 'package:flutter_course_final_project/VIEW_MODEL/auth_provider.dart';
+import 'package:flutter_course_final_project/VIEW_MODEL/profile_provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import 'SERVICES/cache_helper.dart';
+import 'SERVICES/sp_helper.dart';
 import 'SERVICES/navigator_helper.dart';
 import 'VIEW/auth/screens/login_screen.dart';
 import 'VIEW/auth/screens/register_screen.dart';
@@ -22,12 +23,14 @@ import 'VIEW/on_boarding/screens/on_boarding_screen.dart';
 import 'VIEW/my_account/screens/setting_screen.dart';
 import 'VIEW/splash/splash_screen.dart';
 import 'VIEW_MODEL/global_view_provider.dart';
+import 'VIEW_MODEL/home_screen_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await EasyLocalization.ensureInitialized();
-  await CacheHelper.init();
+  await SPHelper.spHelper.initSharedPrefrences();
+
   runApp(
     EasyLocalization(
       supportedLocales: const [
@@ -52,6 +55,8 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<GlobalViewProvider>(create: (context) => GlobalViewProvider(),),
           ChangeNotifierProvider<AppProvider>(create: (context) => AppProvider(),),
           ChangeNotifierProvider<AuthProvider>(create: (context) => AuthProvider(),),
+          ChangeNotifierProvider<ProfileProvider>(create: (context) => ProfileProvider(),),
+          ChangeNotifierProvider<HomeScreenProvider>(create: (context) => HomeScreenProvider(),),
         ],
         child: MaterialApp(
           builder: (context, child) {

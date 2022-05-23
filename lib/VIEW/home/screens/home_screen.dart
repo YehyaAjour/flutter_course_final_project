@@ -1,6 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_course_final_project/VIEW_MODEL/home_screen_provider.dart';
 
+import '../../../MODEL/vegetable_category_model.dart';
 import '../../../SERVICES/app_imports.dart';
+import '../../../VIEW_MODEL/profile_provider.dart';
 import '../../fruit_detail/screens/fruit_detail_screen.dart';
 import '../widget/build_item.dart';
 import '../widget/top_home.dart';
@@ -12,7 +15,9 @@ class HomeScreen extends StatelessWidget {
     return Column(
       children: [
         TopHome(),
-        SizedBox(height: 25.h,),
+        SizedBox(
+          height: 25.h,
+        ),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
@@ -106,69 +111,84 @@ class HomeScreen extends StatelessWidget {
           height: 10.h,
         ),
         Expanded(
-          child: ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            itemCount: 3,
-            itemBuilder: (BuildContext context, int index) {
-              return Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w),
-                    child: Row(
-                      children: [
-                        CustomText(
-                          'Organic Fruit',
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w800,
+          child: Consumer<HomeScreenProvider>(builder: (context, value, child) {
+            return value.vegetablesItemModel == null || value.vegetablesItemModel.isEmpty
+                ? const Center(
+                    child: CircularProgressIndicator(color: greenColor,),
+                  )
+                : SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+              children: value.vegetablesItemModel.map((e) {
+                  return Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.w),
+                        child: Row(
+                          children: [
+                            CustomText(
+                              e.categoryName,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w800,
+                            ),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            CustomText(
+                              '(${e.copon}% Off)',
+                              fontWeight: FontWeight.bold,
+                              color: greenColor,
+                              fontSize: 12.sp,
+                            ),
+                          ],
                         ),
-                        SizedBox(
-                          width: 10.w,
+                      ),
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.w),
+                        child: Row(
+                          children: [
+                            CustomText(
+                              e.details,
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ],
                         ),
-                        CustomText(
-                          '(20% Off)',
-                          fontWeight: FontWeight.bold,
-                          color: greenColor,
-                          fontSize: 12.sp,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 5.h,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w),
-                    child: Row(
-                      children: [
-                        CustomText(
-                          'Pick up from organic farms',
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 16.h,
-                  ),
-                  SizedBox(
-                    height: 230.h,
-                    child: ListView.builder(
-                      itemCount: 4,
-                      physics: const BouncingScrollPhysics(),
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => BuildItem(onTapItem: () {
-                        NavigationHelper.navigationHelper
-                            .pushMethod(FruitDetailScreen.routeName);
-                      }),
-                    ),
-                  ),
-                ],
-              );
-            },
-          ),
-        ),
+                      ),
+                      SizedBox(
+                        height: 16.h,
+                      ),
+                      SizedBox(
+                        height: 230.h,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: e.fruitItems.length,
+                          itemBuilder: (context, index) {
+                            return BuildItem(
+                              onTapItem: () {
+                                NavigationHelper.navigationHelper
+                                    .pushMethod(
+                                    FruitDetailScreen.routeName);
+                              },
+                              imgUrl:e.fruitItems[index].image,
+                              fruitRate:
+                              int.parse(e.fruitItems[index].rate),
+                              fruitPrice: e.fruitItems[index].price,
+                              fruitName: e.fruitItems[index].name,
+                              isLiked: e.fruitItems[index].isLiked,
+                            );
+                        },),
+                      ),
+                    ],
+                  );
+              }).toList(),
+            ),
+                );
+          }),
+        )
       ],
     );
   }

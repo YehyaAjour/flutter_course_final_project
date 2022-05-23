@@ -1,19 +1,17 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_course_final_project/MODEL/user_model.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_course_final_project/VIEW/auth/screens/login_screen.dart';
+import 'package:flutter_course_final_project/VIEW/main_screen/screens/main_screen.dart';
 
 import '../SERVICES/app_imports.dart';
+import '../SERVICES/progress_dialog_utils.dart';
+import '../SERVICES/sp_helper.dart';
 import '../SERVICES/helper.dart';
 
 class AuthProvider extends ChangeNotifier {
-  bool isLoading = false;
-
-  setLoading() {
-    isLoading = !isLoading;
-    notifyListeners();
-  }
-
   register({
     String userName,
     String email,
@@ -21,23 +19,30 @@ class AuthProvider extends ChangeNotifier {
     String phone,
   }) async {
     try {
-      setLoading();
+      ProgressDialogUtils.show();
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
 
-      userCreate(uId: userCredential.user.uid,phone: phone,email: email,name: userName);
-      setLoading();
+      userCreate(
+          uId: userCredential.user.uid,
+          phone: phone,
+          email: email,
+          name: userName);
+      ProgressDialogUtils.hide();
+      Helper.setToastSucesses(msg: 'تم التسجيل بنجاح');
+      NavigationHelper.navigationHelper
+          .pushReplacmentMethod(LoginScreen.routeName);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-        setLoading();
+        ProgressDialogUtils.hide();
+        Helper.setToastError(msg: 'The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-        setLoading();
+        ProgressDialogUtils.hide();
+        Helper.setToastError(msg: 'The account already exists for that email.');
       }
     } catch (e) {
       print(e);
-      setLoading();
+      ProgressDialogUtils.hide();
     }
   }
 
@@ -46,22 +51,20 @@ class AuthProvider extends ChangeNotifier {
     String password,
   }) async {
     try {
-      setLoading();
+      ProgressDialogUtils.show();
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-      if (userCredential.user.email != null) {
-        setLoading();
-        print(userCredential.user);
+      if (userCredential.user.uid != null) {
+        await SPHelper.spHelper.setToken(userCredential.user.uid);
+        ProgressDialogUtils.hide();
+        NavigationHelper.navigationHelper
+            .pushReplacmentMethod(MainScreen.routeName);
         Helper.setToastSucesses(msg: 'تم تسجيل الدخول بنجاح');
-      }
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        setLoading();
-        Helper.setToastError(msg: 'No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        setLoading();
-        Helper.setToastError(msg: 'Wrong password provided for that user.');
-      }
+      } else {}
+    } catch (e) {
+      ProgressDialogUtils.hide();
+      Helper.setToastError(msg: e.toString().split(']').last);
+      log(e.toString());
     }
   }
 
@@ -71,17 +74,36 @@ class AuthProvider extends ChangeNotifier {
     String email,
     String phone,
   }) async {
-    setLoading();
-    UserModel userModel =
-        UserModel(email: email, name: name, phone: phone, uId: uId);
+    ProgressDialogUtils.show();
+    UserModel userModel = UserModel(
+        email: email,
+        name: name,
+        phone: phone,
+        uId: uId,
+        image:
+            'https://media-exp1.licdn.com/dms/image/C5603AQEGpL-pXwsXaQ/profile-displayphoto-shrink_800_800/0/1637263394180?e=1657756800&v=beta&t=iJEYwp8oZA1C7a78aO3Lt6KdnsjiIs_n5wJLrwSr8tw');
     FirebaseFirestore.instance
         .collection('users')
         .doc(uId)
         .set(userModel.toMap())
         .then((value) {
-      setLoading();
+      ProgressDialogUtils.hide();
     }).catchError((e) {
-      setLoading();
+      ProgressDialogUtils.hide();
     });
+  }
+
+  logout() async {
+    try {
+      ProgressDialogUtils.show();
+      await FirebaseAuth.instance.signOut();
+      SPHelper.spHelper.setToken('');
+      ProgressDialogUtils.hide();
+      NavigationHelper.navigationHelper.pushMethod(LoginScreen.routeName);
+      Helper.setToastSucesses(msg: 'تم تسجيل الخروج بنجاح');
+    } catch (e) {
+      ProgressDialogUtils.hide();
+      Helper.setToastError(msg: e.toString());
+    }
   }
 }
