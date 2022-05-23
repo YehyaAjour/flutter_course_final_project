@@ -22,6 +22,7 @@ import 'VIEW/notification/screens/notification_screen.dart';
 import 'VIEW/on_boarding/screens/on_boarding_screen.dart';
 import 'VIEW/my_account/screens/setting_screen.dart';
 import 'VIEW/splash/splash_screen.dart';
+import 'VIEW_MODEL/cart_provider.dart';
 import 'VIEW_MODEL/global_view_provider.dart';
 import 'VIEW_MODEL/home_screen_provider.dart';
 
@@ -57,6 +58,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<AuthProvider>(create: (context) => AuthProvider(),),
           ChangeNotifierProvider<ProfileProvider>(create: (context) => ProfileProvider(),),
           ChangeNotifierProvider<HomeScreenProvider>(create: (context) => HomeScreenProvider(),),
+          ChangeNotifierProvider<Cart>(create: (context) => Cart(),),
         ],
         child: MaterialApp(
           builder: (context, child) {

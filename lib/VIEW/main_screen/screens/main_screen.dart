@@ -1,6 +1,7 @@
 
 
 import '../../../SERVICES/app_imports.dart';
+import '../../cart_screen.dart';
 import '../../custom_widget/custom_nav_button.dart';
 import '../../favourite/screens/favourite_screen.dart';
 import '../../home/screens/home_screen.dart';
@@ -29,7 +30,7 @@ class _MainScreenState extends State<MainScreen> {
 class PageNav {
   static List<Widget> widgetOptions = <Widget>[
     HomeScreen(),
-    Container(),
+    const CartScreen(),
     FavouriteScreen(),
     MyAccountScreen(),
   ];

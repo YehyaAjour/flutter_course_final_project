@@ -104,9 +104,7 @@ class FruitDetailItem extends StatelessWidget {
                 child: TextButton(
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(greenColor)),
-                  onPressed: () {
-                    // NavigationHelper.navigationHelper.pushMethod(LoginScreen.routeName);
-                  },
+                  onPressed: onBuyNowPressed,
                   child: CustomText('Buy Now',
                       color: whiteColor,
                       fontSize: 14.sp,
