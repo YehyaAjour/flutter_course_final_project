@@ -180,6 +180,7 @@ class HomeScreen extends StatelessWidget {
                                                     imgUrl: e.fruitItems[index].image,
                                                     name: e.fruitItems[index].name,
                                                     price: e.fruitItems[index].price,
+                                                    desc: e.fruitItems[index].desc,
                                                   )));
                                     },
                                     imgUrl: e.fruitItems[index].image,

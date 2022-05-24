@@ -37,9 +37,10 @@ class FruitItems {
   String price;
   String rate;
   String product_id;
+  String desc;
   bool isLiked;
 
-  FruitItems({this.image, this.name, this.price, this.rate, this.isLiked,this.product_id});
+  FruitItems({this.image, this.name, this.price, this.rate, this.isLiked,this.product_id,this.desc});
 
   FruitItems.fromJson(Map<String, dynamic> json) {
     image = json['image'];
@@ -47,6 +48,7 @@ class FruitItems {
     price = json['price'];
     rate = json['rate'];
     product_id = json['product_id'];
+    desc = json['desc'];
     isLiked = json['is_liked'];
   }
 
@@ -57,6 +59,7 @@ class FruitItems {
     data['price'] = this.price;
     data['rate'] = this.rate;
     data['product_id'] = this.product_id;
+    data['desc'] = this.desc;
     data['is_liked'] = this.isLiked;
     return data;
   }

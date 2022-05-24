@@ -11,8 +11,9 @@ class FruitDetailScreen extends StatelessWidget {
   final String name;
   final String price;
   final String pdID;
+  final String desc;
 
-  const FruitDetailScreen({Key key, this.imgUrl, this.name, this.price,this.pdID}) : super(key: key);
+  const FruitDetailScreen({Key key, this.imgUrl, this.name, this.price,this.pdID,this.desc}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,16 +40,15 @@ class FruitDetailScreen extends StatelessWidget {
           imgUrl:
               imgUrl,
           fruitName: name,
-          fruitDetail:
-              'Broccoli is a green vegetable that vaguely  nutritional Powerhouse of vitamin,fiber and antioxidents.Broccoli contains lutein and  which mayPrevent from stress and',
+          fruitDetail: desc,
           fruitNutritionList: ['fat','Potassium','Selenium','Vitamin B9','Vitamin A','Vitamin K','Zinc','Phosphorous'],
           price: price,
           onBuyNowPressed: (){
            bool added = cart.addItem(
-              imgurl: 'https://solidstarts.com/wp-content/uploads/when-can-babies-eat-watermelon.jpg',
-              name:'Broccoli',
-              desc:  'Broccoli is a green vegetable that vaguely  nutritional Powerhouse of vitamin,fiber and antioxidents.Broccoli contains lutein and  which mayPrevent from stress and',
-              price: 190,
+              imgurl: imgUrl,
+              name:name,
+              desc:  desc,
+              price: double.parse(price),
               quantitiy: 1,
               pdtid:pdID,
             );

@@ -107,46 +107,50 @@ class _CartScreenState extends State<CartScreen> with TickerProviderStateMixin{
                 )
               ],
             ):Expanded(
-              child: ListView.builder(
-                itemCount: cart.items.length,
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return Dismissible(
-                    direction: DismissDirection.endToStart,
-                    key: UniqueKey(),
-                    background: Container(
-                      color: const Color(0xffEE3B3B),
-                      child: Padding(
-                        padding: const EdgeInsets.all(25),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: const [
-                            Icon(
-                              Icons.delete_outline_outlined,
-                              color: Colors.white,
-                              size: 35,
-                            ),
-                          ],
+              child: SingleChildScrollView(
+
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: cart.items.length,
+                  physics:NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return Dismissible(
+                      direction: DismissDirection.endToStart,
+                      key: UniqueKey(),
+                      background: Container(
+                        color: const Color(0xffEE3B3B),
+                        child: Padding(
+                          padding: const EdgeInsets.all(25),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: const [
+                              Icon(
+                                Icons.delete_outline_outlined,
+                                color: Colors.white,
+                                size: 35,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    onDismissed: (DismissDirection direction) {
-                      cart.removeItem(cart.items.values.toList()[index].id);
-                      print('Remove item');
-                      print(cart.items.values.length);
-                    },
-                    child: CartItemWidget(
-                      fruitImageUrl:cart.items.values.toList()[index].imgurl,
-                      fruitName: cart.items.values.toList()[index].name,
-                      fruitPrice: cart.items.values.toList()[index].price.toString(),
-                      fruitDetails: cart.items.values.toList()[index].desc,
-                      fruitRate: '4',
-                      onPressedAdd: () {
-
+                      onDismissed: (DismissDirection direction) {
+                        cart.removeItem(cart.items.values.toList()[index].id);
+                        print('Remove item');
+                        print(cart.items.values.length);
                       },
-                    ),
-                  );
-                },
+                      child: CartItemWidget(
+                        fruitImageUrl:cart.items.values.toList()[index].imgurl,
+                        fruitName: cart.items.values.toList()[index].name,
+                        fruitPrice: cart.items.values.toList()[index].price.toString(),
+                        fruitDetails: cart.items.values.toList()[index].desc,
+                        fruitRate: '4',
+                        onPressedAdd: () {
+
+                        },
+                      ),
+                    );
+                  },
+                ),
               ),
             )
           ],
