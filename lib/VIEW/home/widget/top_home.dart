@@ -37,6 +37,7 @@ class TopHome extends StatelessWidget {
                     color: Colors.white,
                   ),
                   onPressed: () {
+
                     NavigationHelper.navigationHelper
                         .pushMethod(NotificationScreen.routeName);
                   },

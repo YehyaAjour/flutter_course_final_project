@@ -1,6 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_course_final_project/SERVICES/firebase_helper.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../../SERVICES/app_imports.dart';
 import '../VIEW_MODEL/cart_provider.dart';
@@ -14,9 +15,10 @@ class CartScreen extends StatefulWidget {
   State<CartScreen> createState() => _CartScreenState();
 }
 
-class _CartScreenState extends State<CartScreen> with TickerProviderStateMixin{
+class _CartScreenState extends State<CartScreen> with TickerProviderStateMixin {
   AnimationController animationController2;
   Animation<Offset> animation2;
+
   intsd() {
     animationController2 = AnimationController(
       duration: const Duration(milliseconds: 750),
@@ -27,18 +29,21 @@ class _CartScreenState extends State<CartScreen> with TickerProviderStateMixin{
       end: Offset.zero,
     ).animate(animationController2);
   }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     intsd();
   }
+
   @override
   void dispose() {
     // TODO: implement dispose
     animationController2.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context);
@@ -60,99 +65,129 @@ class _CartScreenState extends State<CartScreen> with TickerProviderStateMixin{
                 fontWeight: FontWeight.normal,
               ),
             ),
-            const SizedBox(height: 20,),
-            cart.items.isEmpty?const SizedBox():Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'إسحب للحذف',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
-                  ),
-                ),
-                const SizedBox(
-                  width: 30,
-                ),
-                SlideTransition(
-                  position: animation2,
-                  child: const CircleAvatar(
-                    radius: 15,
-                    backgroundColor:greenColor,
-                    child: Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ],
+            const SizedBox(
+              height: 20,
             ),
-            cart.items.isEmpty?  Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(height: 80,),
-                Center(
-                  child: Image.asset(
-                      'assets/images/shopping-cart.png',height: 180,),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Text(
-                  ' ! السلة فارغة قم بإضافة منتجات',
-                  style: TextStyle(
-                      color: greenColor,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700),
-                )
-              ],
-            ):Expanded(
-              child: SingleChildScrollView(
-
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: cart.items.length,
-                  physics:NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return Dismissible(
-                      direction: DismissDirection.endToStart,
-                      key: UniqueKey(),
-                      background: Container(
-                        color: const Color(0xffEE3B3B),
-                        child: Padding(
-                          padding: const EdgeInsets.all(25),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: const [
-                              Icon(
-                                Icons.delete_outline_outlined,
-                                color: Colors.white,
-                                size: 35,
-                              ),
-                            ],
+            cart.items.isEmpty
+                ? const SizedBox()
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'إسحب للحذف',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 30,
+                      ),
+                      SlideTransition(
+                        position: animation2,
+                        child: const CircleAvatar(
+                          radius: 15,
+                          backgroundColor: greenColor,
+                          child: Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
                           ),
                         ),
                       ),
-                      onDismissed: (DismissDirection direction) {
-                        cart.removeItem(cart.items.values.toList()[index].id);
-                        print('Remove item');
-                        print(cart.items.values.length);
-                      },
-                      child: CartItemWidget(
-                        fruitImageUrl:cart.items.values.toList()[index].imgurl,
-                        fruitName: cart.items.values.toList()[index].name,
-                        fruitPrice: cart.items.values.toList()[index].price.toString(),
-                        fruitDetails: cart.items.values.toList()[index].desc,
-                        fruitRate: '4',
-                        onPressedAdd: () {
-
-                        },
+                    ],
+                  ),
+            cart.items.isEmpty
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        height: 80,
                       ),
-                    );
-                  },
-                ),
-              ),
-            )
+                      Center(
+                        child: Image.asset(
+                          'assets/images/shopping-cart.png',
+                          height: 180,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Text(
+                        ' ! السلة فارغة قم بإضافة منتجات',
+                        style: TextStyle(
+                            color: greenColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700),
+                      )
+                    ],
+                  )
+                : Expanded(
+                    child: ListView.builder(
+                      itemCount: cart.items.length,
+                      physics: BouncingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return Slidable(
+                          actionPane: SlidableDrawerActionPane(),
+                          secondaryActions: [
+                            IconSlideAction(
+                              caption: 'حذف',
+                              icon: Icons.delete,
+                              color: Colors.red,
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (ctx) => AlertDialog(
+                                    title: Text("تأكيد الحذف"),
+                                    content: Text("حذف من المفضلة ؟"),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () {
+                                          cart.removeItem(cart.items.values
+                                              .toList()[index]
+                                              .id);
+                                          print('Remove item');
+                                          print(cart.items.values.length);
+                                          Navigator.of(ctx).pop();
+                                        },
+                                        child: CustomText(
+                                          "تأكيد",
+                                          color: greenColor,
+                                          fontSize: 16.sp,
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(ctx).pop();
+                                        },
+                                        child: CustomText(
+                                          "إلغاء",
+                                          fontSize: 16.sp,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            )
+                          ],
+                          child: CartItemWidget(
+                            fruitImageUrl:
+                                cart.items.values.toList()[index].imgurl,
+                            fruitName: cart.items.values.toList()[index].name,
+                            fruitPrice: cart.items.values
+                                .toList()[index]
+                                .price
+                                .toString(),
+                            fruitDetails:
+                                cart.items.values.toList()[index].desc,
+                            fruitRate: '4',
+                            onPressedAdd: () {},
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+            SizedBox(height: 100,)
           ],
         ),
         Align(
@@ -175,24 +210,27 @@ class _CartScreenState extends State<CartScreen> with TickerProviderStateMixin{
               children: [
                 InkWell(
                   onTap: () {
-                    cart.items.values.isEmpty?ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Please Add Items To Cart'))):
-                    AwesomeDialog(
-                      context: context,
-                      animType: AnimType.LEFTSLIDE,
-                      headerAnimationLoop: false,
-                      dialogType: DialogType.SUCCES,
-                      showCloseIcon: true,
-                      title: 'Succes',
-                      desc:
-                      'Dialog description here..................................................',
-                      btnOkOnPress: () {
-                        debugPrint('OnClcik');
-                      },
-                      btnOkIcon: Icons.check_circle,
-                      onDissmissCallback: (type) {
-                        debugPrint('Dialog Dissmiss from callback $type');
-                      },
-                    ).show();
+                    cart.items.values.isEmpty
+                        ? ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Please Add Items To Cart')))
+                        : AwesomeDialog(
+                            context: context,
+                            animType: AnimType.LEFTSLIDE,
+                            headerAnimationLoop: false,
+                            dialogType: DialogType.SUCCES,
+                            showCloseIcon: true,
+                            title: 'Succes',
+                            desc:
+                                'Dialog description here..................................................',
+                            btnOkOnPress: () {
+                              debugPrint('OnClcik');
+                            },
+                            btnOkIcon: Icons.check_circle,
+                            onDissmissCallback: (type) {
+                              debugPrint('Dialog Dissmiss from callback $type');
+                            },
+                          ).show();
 
                     FirebaseHelper.firebaseHelper.addOrderToFireStore(
                       price: cart.totalAmount.toString(),
@@ -203,9 +241,9 @@ class _CartScreenState extends State<CartScreen> with TickerProviderStateMixin{
                     height: 50,
                     width: 150,
                     decoration: BoxDecoration(
-                      boxShadow:  const [
+                      boxShadow: const [
                         BoxShadow(
-                          color:Colors.grey,
+                          color: Colors.grey,
                           offset: Offset(0.0, 1.0), //(x,y)
                           blurRadius: 6.0,
                         ),
@@ -228,7 +266,7 @@ class _CartScreenState extends State<CartScreen> with TickerProviderStateMixin{
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children:  [
+                  children: [
                     const Text(
                       'المجموع',
                       style: TextStyle(
