@@ -112,81 +112,90 @@ class HomeScreen extends StatelessWidget {
         ),
         Expanded(
           child: Consumer<HomeScreenProvider>(builder: (context, value, child) {
-            return value.vegetablesItemModel == null || value.vegetablesItemModel.isEmpty
+            return value.vegetablesItemModel == null ||
+                    value.vegetablesItemModel.isEmpty
                 ? const Center(
-                    child: CircularProgressIndicator(color: greenColor,),
+                    child: CircularProgressIndicator(
+                      color: greenColor,
+                    ),
                   )
                 : SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  child: Column(
-              children: value.vegetablesItemModel.map((e) {
-                  return Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.w),
-                        child: Row(
+                    physics: const BouncingScrollPhysics(),
+                    child: Column(
+                      children: value.vegetablesItemModel.map((e) {
+                        return Column(
                           children: [
-                            CustomText(
-                              e.categoryName,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w800,
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 20.w),
+                              child: Row(
+                                children: [
+                                  CustomText(
+                                    e.categoryName,
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  CustomText(
+                                    '(${e.copon}% Off)',
+                                    fontWeight: FontWeight.bold,
+                                    color: greenColor,
+                                    fontSize: 12.sp,
+                                  ),
+                                ],
+                              ),
                             ),
                             SizedBox(
-                              width: 10.w,
+                              height: 5.h,
                             ),
-                            CustomText(
-                              '(${e.copon}% Off)',
-                              fontWeight: FontWeight.bold,
-                              color: greenColor,
-                              fontSize: 12.sp,
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 20.w),
+                              child: Row(
+                                children: [
+                                  CustomText(
+                                    e.details,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 16.h,
+                            ),
+                            SizedBox(
+                              height: 250.h,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: e.fruitItems.length,
+                                itemBuilder: (context, index) {
+                                  return BuildItem(
+                                    onTapItem: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  FruitDetailScreen(
+                                                    pdID: e.fruitItems[index].product_id,
+                                                    imgUrl: e.fruitItems[index].image,
+                                                    name: e.fruitItems[index].name,
+                                                    price: e.fruitItems[index].price,
+                                                  )));
+                                    },
+                                    imgUrl: e.fruitItems[index].image,
+                                    fruitRate: int.parse(e.fruitItems[index].rate),
+                                    fruitPrice: e.fruitItems[index].price,
+                                    fruitName: e.fruitItems[index].name,
+                                    isLiked: e.fruitItems[index].isLiked,
+                                  );
+                                },
+                              ),
                             ),
                           ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5.h,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.w),
-                        child: Row(
-                          children: [
-                            CustomText(
-                              e.details,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 16.h,
-                      ),
-                      SizedBox(
-                        height: 230.h,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: e.fruitItems.length,
-                          itemBuilder: (context, index) {
-                            return BuildItem(
-                              onTapItem: () {
-                                NavigationHelper.navigationHelper
-                                    .pushMethod(
-                                    FruitDetailScreen.routeName);
-                              },
-                              imgUrl:e.fruitItems[index].image,
-                              fruitRate:
-                              int.parse(e.fruitItems[index].rate),
-                              fruitPrice: e.fruitItems[index].price,
-                              fruitName: e.fruitItems[index].name,
-                              isLiked: e.fruitItems[index].isLiked,
-                            );
-                        },),
-                      ),
-                    ],
+                        );
+                      }).toList(),
+                    ),
                   );
-              }).toList(),
-            ),
-                );
           }),
         )
       ],

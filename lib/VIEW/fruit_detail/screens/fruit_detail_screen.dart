@@ -7,6 +7,12 @@ import '../../custom_widget/custom_cached_network_image.dart';
 
 class FruitDetailScreen extends StatelessWidget {
   static String routeName = 'FruitDetailScreen';
+  final String imgUrl;
+  final String name;
+  final String price;
+  final String pdID;
+
+  const FruitDetailScreen({Key key, this.imgUrl, this.name, this.price,this.pdID}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +37,12 @@ class FruitDetailScreen extends StatelessWidget {
       body:  SingleChildScrollView(
         child: FruitDetailItem(
           imgUrl:
-              'https://solidstarts.com/wp-content/uploads/when-can-babies-eat-watermelon.jpg',
-          fruitName: 'Broccoli',
+              imgUrl,
+          fruitName: name,
           fruitDetail:
               'Broccoli is a green vegetable that vaguely  nutritional Powerhouse of vitamin,fiber and antioxidents.Broccoli contains lutein and  which mayPrevent from stress and',
           fruitNutritionList: ['fat','Potassium','Selenium','Vitamin B9','Vitamin A','Vitamin K','Zinc','Phosphorous'],
-          price: '190',
+          price: price,
           onBuyNowPressed: (){
            bool added = cart.addItem(
               imgurl: 'https://solidstarts.com/wp-content/uploads/when-can-babies-eat-watermelon.jpg',
@@ -44,7 +50,7 @@ class FruitDetailScreen extends StatelessWidget {
               desc:  'Broccoli is a green vegetable that vaguely  nutritional Powerhouse of vitamin,fiber and antioxidents.Broccoli contains lutein and  which mayPrevent from stress and',
               price: 190,
               quantitiy: 1,
-              pdtid:'Broccoli',
+              pdtid:pdID,
             );
            if(added){
              Navigator.pop(context);
