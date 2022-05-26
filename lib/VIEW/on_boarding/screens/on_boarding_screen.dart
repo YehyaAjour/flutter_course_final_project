@@ -28,37 +28,41 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             SizedBox(
               height: 54.h,
             ),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              GestureDetector(
-                onTap: () {
-                  showModalBottomSheet(
-                    backgroundColor: Colors.white.withOpacity(0.9),
-                    context: context,
-                    builder: (context) {
-                      return buildSheet();
-                    },
-                  );
-                },
-                child: CustomText(
-                  providerLanguages.current_lang == 'ar'
-                      ? 'العربية'
-                      : "English (United States)",
-                  color: Colors.black,
-                  fontSize: 14.sp,
+            Padding(
+              padding:  EdgeInsets.symmetric(horizontal: 20.0.w),
+              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet(
+                      backgroundColor: Colors.white.withOpacity(0.9),
+                      context: context,
+                      builder: (context) {
+                        return buildSheet();
+                      },
+                    );
+                  },
+                  child: CustomText(
+                    providerLanguages.current_lang == 'ar'
+                        ? 'العربية'
+                        : "English (United States)",
+                    color: Colors.black,
+                    fontSize: 14.sp,
+                  ),
                 ),
-              ),
-              TextButton(
-                onPressed: () {
-                  NavigationHelper.navigationHelper.pushMethod(LoginScreen.routeName);
-                },
-                child: CustomText(
-                  'Skip'.tr(),
-                  color: greyColor,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.normal,
+                TextButton(
+                  onPressed: () {
+                    NavigationHelper.navigationHelper
+                        .pushReplacmentMethod(LoginScreen.routeName);
+                  },
+                  child: CustomText(
+                    'Skip'.tr(),
+                    color: greyColor,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.normal,
+                  ),
                 ),
-              ),
-            ]),
+              ]),
+            ),
             SizedBox(
               height: 79.h,
             ),
@@ -120,7 +124,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(greenColor)),
                 onPressed: () {
-                  NavigationHelper.navigationHelper.pushMethod(LoginScreen.routeName);
+                  NavigationHelper.navigationHelper.pushReplacmentMethod(LoginScreen.routeName);
                 },
                 child: CustomText('Get Started'.tr(),
                     color: whiteColor,

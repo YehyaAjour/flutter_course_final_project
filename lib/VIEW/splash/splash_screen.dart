@@ -1,10 +1,4 @@
 import 'dart:async';
-
-
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter_course_final_project/VIEW/auth/screens/login_screen.dart';
-import 'package:flutter_course_final_project/VIEW_MODEL/profile_provider.dart';
-
 import '../../SERVICES/app_imports.dart';
 import '../../SERVICES/sp_helper.dart';
 import '../../VIEW_MODEL/home_screen_provider.dart';
@@ -30,7 +24,6 @@ class _SplashScreenState extends State<SplashScreen> {
         NavigationHelper.navigationHelper
             .pushReplacmentMethod(OnBoardingScreen.routeName);
       } else {
-        Provider.of<ProfileProvider>(context,listen: false);
         Provider.of<HomeScreenProvider>(context,listen: false);
         NavigationHelper.navigationHelper
             .pushReplacmentMethod(MainScreen.routeName);

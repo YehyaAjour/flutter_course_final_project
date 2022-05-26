@@ -2,9 +2,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_course_final_project/SERVICES/app_imports.dart';
 import 'package:flutter_course_final_project/VIEW_MODEL/app_provider.dart';
 import 'package:flutter_course_final_project/VIEW_MODEL/auth_provider.dart';
-import 'package:flutter_course_final_project/VIEW_MODEL/profile_provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +32,10 @@ Future<void> main() async {
   await Firebase.initializeApp();
   await EasyLocalization.ensureInitialized();
   await SPHelper.spHelper.initSharedPrefrences();
-
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: greenColor,
+  ));
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(
     EasyLocalization(
       supportedLocales: const [
@@ -56,7 +60,6 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<GlobalViewProvider>(create: (context) => GlobalViewProvider(),),
           ChangeNotifierProvider<AppProvider>(create: (context) => AppProvider(),),
           ChangeNotifierProvider<AuthProvider>(create: (context) => AuthProvider(),),
-          ChangeNotifierProvider<ProfileProvider>(create: (context) => ProfileProvider(),),
           ChangeNotifierProvider<HomeScreenProvider>(create: (context) => HomeScreenProvider(),),
           ChangeNotifierProvider<Cart>(create: (context) => Cart(),),
         ],

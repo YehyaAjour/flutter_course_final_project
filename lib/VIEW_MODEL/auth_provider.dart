@@ -35,10 +35,13 @@ class AuthProvider extends ChangeNotifier {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         ProgressDialogUtils.hide();
-        Helper.setToastError(msg: 'The password provided is too weak.');
+        Helper.setToastError(msg: 'كلمة السر ضعيفة');
       } else if (e.code == 'email-already-in-use') {
         ProgressDialogUtils.hide();
-        Helper.setToastError(msg: 'The account already exists for that email.');
+        Helper.setToastError(msg: 'هذا البريد مستخدم من قبل');
+      }else{
+        ProgressDialogUtils.hide();
+        Helper.setToastError(msg: 'الرجاء ادخال معلومات صحيحة');
       }
     } catch (e) {
       print(e);
@@ -56,6 +59,7 @@ class AuthProvider extends ChangeNotifier {
           .signInWithEmailAndPassword(email: email, password: password);
       if (userCredential.user.uid != null) {
         await SPHelper.spHelper.setToken(userCredential.user.uid);
+        getUserData(userCredential.user.uid);
         ProgressDialogUtils.hide();
         NavigationHelper.navigationHelper
             .pushReplacmentMethod(MainScreen.routeName);
@@ -66,6 +70,27 @@ class AuthProvider extends ChangeNotifier {
       Helper.setToastError(msg: e.toString().split(']').last);
       log(e.toString());
     }
+  }
+
+  UserModel model;
+
+  void getUserData(token) {
+    // String token = SPHelper.spHelper.getToken();
+
+    ProgressDialogUtils.show();
+
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(token)
+        .get()
+        .then((value) {
+      SPHelper.spHelper.setUserName(value.data()['name']);
+      print(value.data()['name']);
+      model=UserModel.fromJson(value.data());
+      ProgressDialogUtils.hide();
+    }).catchError((e) {
+      ProgressDialogUtils.hide();
+    });
   }
 
   userCreate({
@@ -99,7 +124,7 @@ class AuthProvider extends ChangeNotifier {
       await FirebaseAuth.instance.signOut();
       SPHelper.spHelper.setToken('');
       ProgressDialogUtils.hide();
-      NavigationHelper.navigationHelper.pushMethod(LoginScreen.routeName);
+      NavigationHelper.navigationHelper.pushReplacmentMethod(LoginScreen.routeName);
       Helper.setToastSucesses(msg: 'تم تسجيل الخروج بنجاح');
     } catch (e) {
       ProgressDialogUtils.hide();

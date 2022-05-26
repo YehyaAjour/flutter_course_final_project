@@ -14,6 +14,7 @@ class NavigationHelper {
     navigatorKey.currentState.pushReplacementNamed(pagename);
   }
 
+
   popMethod(String pagename) {
     navigatorKey.currentState.pop(pagename);
   }

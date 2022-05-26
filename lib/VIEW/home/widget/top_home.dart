@@ -10,7 +10,7 @@ class TopHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 133.h,
+      height: 143.h,
       child: Stack(
         children: <Widget>[
           Container(
@@ -20,13 +20,13 @@ class TopHome extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(left: 10),
+                 Padding(
+                  padding: EdgeInsets.only(left: 10.w),
                   child: Text(
                     "Fruit Market",
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 25.0,
+                        fontSize: 25.0.sp,
                         fontWeight: FontWeight.bold,
                         fontFamily: "Poppins"),
                   ),

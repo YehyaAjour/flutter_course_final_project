@@ -19,6 +19,15 @@ class SPHelper {
     sharedPreferences.setString('accessToken', value);
   }
 
+  setUserName(String value) async {
+    sharedPreferences.setString('userName', value);
+  }
+
+  String getUserName() {
+    String x = sharedPreferences.getString('userName');
+    print(x);
+    return x;
+  }
   String getToken() {
     String x = sharedPreferences.getString('accessToken');
     print(x);

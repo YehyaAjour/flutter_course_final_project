@@ -220,15 +220,16 @@ class _CartScreenState extends State<CartScreen> with TickerProviderStateMixin {
                             headerAnimationLoop: false,
                             dialogType: DialogType.SUCCES,
                             showCloseIcon: true,
-                            title: 'Succes',
+                            title: 'تم الطلب بنجاح',
                             desc:
-                                'Dialog description here..................................................',
+                                'تم ارسال طلبك بنجاح',
+
                             btnOkOnPress: () {
-                              debugPrint('OnClcik');
+                              cart.clear();
                             },
                             btnOkIcon: Icons.check_circle,
                             onDissmissCallback: (type) {
-                              debugPrint('Dialog Dissmiss from callback $type');
+                              cart.clear();
                             },
                           ).show();
 

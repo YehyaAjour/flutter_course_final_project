@@ -1,9 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_course_final_project/VIEW_MODEL/home_screen_provider.dart';
-
-import '../../../MODEL/vegetable_category_model.dart';
 import '../../../SERVICES/app_imports.dart';
-import '../../../VIEW_MODEL/profile_provider.dart';
 import '../../fruit_detail/screens/fruit_detail_screen.dart';
 import '../widget/build_item.dart';
 import '../widget/top_home.dart';

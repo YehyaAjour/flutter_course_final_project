@@ -1,15 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_course_final_project/SERVICES/sp_helper.dart';
 import 'package:flutter_course_final_project/VIEW/my_account/widget/top_my_account_item.dart';
-import 'package:flutter_course_final_project/VIEW_MODEL/profile_provider.dart';
 
 import '../../../MODEL/user_model.dart';
 import '../../../SERVICES/app_imports.dart';
 import '../../../VIEW_MODEL/auth_provider.dart';
-import '../../auth/screens/login_screen.dart';
-import '../../custom_widget/custom_cached_network_image.dart';
-import '../../main_screen/screens/main_screen.dart';
 import 'my_order_screen.dart';
 import 'setting_screen.dart';
 import '../widget/my_account_item.dart';
@@ -19,18 +13,13 @@ class MyAccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var value = Provider.of<AppProvider>(context);
     var authProvider = Provider.of<AuthProvider>(context);
-    var profileProvider = Provider.of<ProfileProvider>(context);
 
     return Column(
       children: [
-        Selector<ProfileProvider, UserModel>(
+        Selector<AuthProvider, UserModel>(
           builder: (context, x, _) {
-            if (x == null) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: greenColor,
-                ),
-              );
+            if (x.name == null) {
+              return Container(height: 229.h,color: greenColor,);
             } else {
               return TopMyAccountItem(
                 profileImgUrl:x.image,
@@ -94,8 +83,9 @@ class MyAccountScreen extends StatelessWidget {
                 MyAccountItem(
                     labelName: "Log Out".tr(),
                     iconData: Icons.logout,
-                    onTapItem: () {
-                      authProvider.logout();
+                    onTapItem: () async {
+                      await  authProvider.logout();
+                      value.setIndexScreen(0);
                     }),
               ],
             ),

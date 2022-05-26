@@ -3,6 +3,7 @@ import 'package:flutter_course_final_project/VIEW/auth/screens/register_screen.d
 import 'package:flutter_course_final_project/VIEW/auth/widget/default_text_form_field.dart';
 import '../../../SERVICES/app_imports.dart';
 import '../../../VIEW_MODEL/auth_provider.dart';
+import '../../main_screen/screens/main_screen.dart';
 import '../widget/default_button.dart';
 
 class LoginScreen extends StatelessWidget {

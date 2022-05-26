@@ -23,7 +23,7 @@ class FirebaseHelper{
         .doc(orderId)
         .set({
       'UserId':SPHelper.spHelper.getToken()??'',
-      'UserName':SPHelper.spHelper.getToken()??'',
+      'UserName':SPHelper.spHelper.getUserName()??'',
       'OrderId':orderId,
       'Order':FieldValue.arrayUnion(itemsCart),
       'Total Price':price,
