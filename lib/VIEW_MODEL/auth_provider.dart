@@ -49,6 +49,31 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  userCreate({
+    String uId,
+    String name,
+    String email,
+    String phone,
+  }) async {
+    ProgressDialogUtils.show();
+    UserModel userModel = UserModel(
+        email: email,
+        name: name,
+        phone: phone,
+        uId: uId,
+        image:
+        'https://media-exp1.licdn.com/dms/image/C5603AQEGpL-pXwsXaQ/profile-displayphoto-shrink_800_800/0/1637263394180?e=1657756800&v=beta&t=iJEYwp8oZA1C7a78aO3Lt6KdnsjiIs_n5wJLrwSr8tw');
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(uId)
+        .set(userModel.toMap())
+        .then((value) {
+      ProgressDialogUtils.hide();
+    }).catchError((e) {
+      ProgressDialogUtils.hide();
+    });
+  }
+
   login({
     String email,
     String password,
@@ -93,30 +118,7 @@ class AuthProvider extends ChangeNotifier {
     });
   }
 
-  userCreate({
-    String uId,
-    String name,
-    String email,
-    String phone,
-  }) async {
-    ProgressDialogUtils.show();
-    UserModel userModel = UserModel(
-        email: email,
-        name: name,
-        phone: phone,
-        uId: uId,
-        image:
-            'https://media-exp1.licdn.com/dms/image/C5603AQEGpL-pXwsXaQ/profile-displayphoto-shrink_800_800/0/1637263394180?e=1657756800&v=beta&t=iJEYwp8oZA1C7a78aO3Lt6KdnsjiIs_n5wJLrwSr8tw');
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(uId)
-        .set(userModel.toMap())
-        .then((value) {
-      ProgressDialogUtils.hide();
-    }).catchError((e) {
-      ProgressDialogUtils.hide();
-    });
-  }
+
 
   logout() async {
     try {
